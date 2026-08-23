@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mesa de ayuda-Centro Médico Armonía</title>
+
+  <!-- Tipografías: Poppins (marca / títulos), Inter (formulario / cuerpo), IBM Plex Mono (estado del sistema) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../IMG/escudo-medico.png">
+  <!-- CSS/ está un nivel arriba de HTML/, por eso se sube con ../ -->
+  <link rel="stylesheet" href="../CSS/style.css" />
+</head>
+
+<body>
+
+  <div class="login-shell">
+
+    <!-- ============================================= -->
+    <!-- PANEL IZQUIERDO — Marca / Identidad Willpower  -->
+    <!-- ============================================= -->
+    <aside class="brand-panel">
+      <div class="brand-panel__content">
+
+        <div class="brand-mark">
+          <div class="brand-mark__icon" aria-hidden="true">
+            <svg class="brand-mark__medical-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              aria-hidden="true">
+              <path d="M9 3v6H3v6h6v6h6v-6h6V9h-6V3H9Z" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="brand-mark__name">Centro Médico Armonía</span>
+        </div>
+
+        <h1 class="brand-panel__title">Help Desk</h1>
+        <p class="brand-panel__subtitle">
+          Plataforma interna de soporte <br />
+          <strong>Centro Médico Armonía </strong>
+        <p class="eslogan">"Donde la tecnología y el cuidado laten al mismo ritmo."</p>
+        </p>
+
+        <!-- Elemento distintivo: línea de pulso (ECG) animada, referencia al sector salud -->
+        <div class="pulse-strip" aria-hidden="true">
+          <svg class="pulse-strip__svg" viewBox="0 0 600 90" preserveAspectRatio="none">
+            <polyline class="pulse-strip__line" fill="none"
+              points="0,45 90,45 110,45 125,10 140,80 155,20 170,45 220,45 600,45" />
+          </svg>
+        </div>
+
+        <p class="system-status">
+          <span class="system-status__dot"></span>
+          SISTEMA EN LÍNEA
+        </p>
+
+      </div>
+
+      <p class="brand-panel__footer"><span aria-hidden="true">🔥</span> © Willpower — Empresa de desarollo de software
+        de gestión de soporte</p>
+    </aside>
+
+    <!-- ============================================= -->
+    <!-- PANEL DERECHO — Formulario de inicio de sesión -->
+    <!-- ============================================= -->
+    <main class="form-panel">
+      <div class="form-card">
+
+        <!-- Marca visible solo en móvil (el panel izquierdo se oculta en pantallas pequeñas) -->
+        <div class="brand-mark brand-mark--mobile">
+          <div class="brand-mark__icon" aria-hidden="true">
+            <svg class="brand-mark__medical-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              aria-hidden="true">
+              <path d="M9 3v6H3v6h6v6h6v-6h6V9h-6V3H9Z" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="brand-mark__name">Centro Médico Armonía</span>
+        </div>
+
+        <p class="form-card__eyebrow">Acceso al sistema</p>
+        <h2 class="form-card__title">Iniciar sesión</h2>
+        <p class="form-card__hint">Ingresa tus credenciales para continuar.</p>
+
+        <!-- ============================================= -->
+        <!-- FORMULARIO — envía por POST a php/procesar_login.php -->
+        <!-- ============================================= -->
+        <!-- PHP/ está un nivel arriba de HTML/, por eso se sube con ../ -->
+        <form id="loginForm" class="login-form" action="../JS/login.js" method="POST" novalidate>
+
+          <!-- Campo: correo o usuario -->
+          <div class="field">
+            <input type="text" id="usuario" name="usuario" class="field__input" placeholder=" " autocomplete="username"
+              required />
+            <label for="usuario" class="field__label">Correo o usuario</label>
+            <span class="field__error" data-error-for="usuario">Ingresa tu correo o usuario.</span>
+          </div>
+
+          <!-- Campo: contraseña, con botón de mostrar/ocultar -->
+          <div class="field">
+            <input type="password" id="password" name="password" class="field__input" placeholder=" "
+              autocomplete="current-password" required minlength="6" />
+            <label for="password" class="field__label">Contraseña</label>
+            <button type="button" class="field__toggle" id="togglePassword" aria-label="Mostrar contraseña"
+              aria-pressed="false">
+              <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+            <span class="field__error" data-error-for="password">Mínimo 6 caracteres.</span>
+          </div>
+
+          <!-- Selector de rol -->
+          <div class="field field--select">
+            <select id="rol" name="rol" class="field__input field__input--select" required>
+              <option value="" disabled selected hidden> </option>
+              <option value="solicitante">Personal médico / administrativo</option>
+              <option value="agente">Agente de soporte técnico</option>
+              <option value="coordinador">Coordinador de sistemas</option>
+            </select>
+            <label for="rol" class="field__label field__label--select">Ingresar como</label>
+            <svg class="field__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+              stroke-width="1.8" aria-hidden="true">
+              <path d="M4 6l4 4 4-4" />
+            </svg>
+          </div>
+
+          <div class="login-form__row">
+            <label class="checkbox">
+              <input type="checkbox" name="recordar" id="recordar" />
+              <span class="checkbox__box" aria-hidden="true"></span>
+              Recordarme
+            </label>
+            <a href="#" class="login-form__forgot">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btnSubmit">
+            <span class="btn-submit__label" onclick="validarFormulario()">Entrar</span>
+            <span class="btn-submit__spinner" aria-hidden="true"></span>
+          </button>
+
+        </form>
+        <!-- El contenedor principal ahora es un DIV de Bootstrap -->
+
+
+
+
+        <p class="form-card__footer">
+          ¿Problemas para acceder? Contacta al coordinador de sistemas de tu sede.
+        </p>
+
+      </div>
+    </main>
+
+  </div>
+
+  <div class="modal fade" id="mymodal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Estado de la Conexión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <!-- 📌 Aquí es donde JavaScript va a inyectar tu respuesta de PHP -->
+        <div class="modal-body" id="textoModal">
+          <p>Cargando información...</p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- JS/ está un nivel arriba de HTML/, por eso se sube con ../ -->
+<!-- <script src="../JS/script.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="../JS/login.js"></script>
+
+</html>

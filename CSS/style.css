@@ -1,0 +1,518 @@
+/* =====================================================
+   WILLPOWER — LOGIN
+   Paleta sector salud: azul clínico + turquesa suave
+   ===================================================== */
+
+:root {
+  /* Color */
+  --color-primary: #0056b3;
+  --color-primary-dark: #00408a;
+  --color-primary-soft: #e0f7fa;
+  --color-accent: #00acc1;
+  --color-bg: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-text: #1c2b36;
+  --color-text-muted: #5b6b76;
+  --color-border: #dbe4e8;
+  --color-error: #d64550;
+
+  /* Tipografía */
+  --font-display: "Poppins", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  /* Movimiento */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 220ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration: 0ms; }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =====================================================
+   LAYOUT GENERAL
+   ===================================================== */
+
+.login-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 42% 58%;
+}
+
+@media (max-width: 900px) {
+  .login-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+/* =====================================================
+   PANEL DE MARCA (izquierda)
+   ===================================================== */
+
+.brand-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3.5rem;
+  background: linear-gradient(160deg, var(--color-primary) 0%, #00789a 65%, var(--color-accent) 100%);
+  color: #fff;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .brand-panel {
+    padding: 2.75rem 1.75rem 2.25rem;
+    justify-content: flex-start;
+  }
+  .brand-panel__title { font-size: 1.9rem !important; }
+  .pulse-strip { display: none; }
+}
+
+.brand-panel__content {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 2.75rem;
+}
+
+.brand-mark--mobile {
+  display: none;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .brand-mark--mobile { display: flex; }
+  .brand-mark:not(.brand-mark--mobile) { margin-bottom: 1.25rem; }
+}
+
+.brand-mark__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.form-panel .brand-mark__icon {
+  background: var(--color-primary-soft);
+  border: 1px solid #cdeef2;
+}
+
+.brand-mark__medical-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+.eslogan {
+    margin-top: 16px;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.9;
+}
+.brand-panel .brand-mark__medical-icon { filter: brightness(0) invert(1); }
+
+@media (max-width: 420px) {
+  .brand-mark__name { font-size: 0.92rem; }
+}
+
+.brand-mark__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+
+.form-panel .brand-mark__name { color: var(--color-text); }
+
+.brand-panel__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  margin: 0 0 0.9rem;
+}
+
+.brand-panel__subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 3rem;
+  max-width: 320px;
+}
+
+.brand-panel__subtitle strong { color: #fff; font-weight: 600; }
+
+/* --- Elemento distintivo: línea de pulso (ECG) --- */
+.pulse-strip {
+  width: 100%;
+  max-width: 420px;
+  height: 60px;
+  margin-bottom: 1.25rem;
+  opacity: 0.9;
+}
+
+.pulse-strip__svg { width: 100%; height: 100%; }
+
+.pulse-strip__line {
+  stroke: #fff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 620;
+  stroke-dashoffset: 620;
+  animation: draw-pulse 3.4s var(--ease) infinite;
+}
+
+@keyframes draw-pulse {
+  0% { stroke-dashoffset: 620; }
+  55% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -620; }
+}
+
+.system-status {
+  position: relative;
+  top: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 1.5rem 0 0;
+}
+
+.system-status__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7CFFB2;
+  box-shadow: 0 0 0 0 rgba(124, 255, 178, 0.6);
+  animation: status-glow 2s infinite;
+}
+
+@keyframes status-glow {
+  0% { box-shadow: 0 0 0 0 rgba(124, 255, 178, 0.55); }
+  70% { box-shadow: 0 0 0 6px rgba(124, 255, 178, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(124, 255, 178, 0); }
+}
+
+.brand-panel__footer {
+  position: absolute;
+  left: 3.5rem;
+  bottom: 2rem;
+  z-index: 1;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .brand-panel__footer { display: none; }
+}
+
+/* =====================================================
+   PANEL DE FORMULARIO (derecha)
+   ===================================================== */
+
+.form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background-image: linear-gradient(rgba(248, 249, 250, 0.82), rgba(248, 249, 250, 0.82)), url("../IMG/fondo.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-card__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 0.6rem;
+  font-weight: 500;
+}
+
+.form-card__title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 0.4rem;
+}
+
+.form-card__hint {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  margin: 0 0 2rem;
+}
+
+/* =====================================================
+   CAMPOS DEL FORMULARIO
+   ===================================================== */
+
+.login-form { display: flex; flex-direction: column; gap: 1.35rem; }
+
+.field { position: relative; }
+
+.field__input {
+  width: 100%;
+  height: 52px;
+  padding: 1.1rem 1rem 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+}
+
+.field__input:hover { border-color: #b9cdd6; }
+
+.field__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-primary-soft);
+}
+
+.field__label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.98rem;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: top var(--duration) var(--ease), font-size var(--duration) var(--ease), color var(--duration) var(--ease);
+  background: transparent;
+}
+
+.field__input:focus + .field__label,
+.field__input:not(:placeholder-shown) + .field__label {
+  top: 0.68rem;
+  font-size: 0.72rem;
+  color: var(--color-primary);
+}
+
+.field__error {
+  display: none;
+  font-size: 0.78rem;
+  color: var(--color-error);
+  margin-top: 0.35rem;
+  padding-left: 0.15rem;
+}
+
+.field.is-invalid .field__input { border-color: var(--color-error); }
+.field.is-invalid .field__input:focus { box-shadow: 0 0 0 4px rgba(214, 69, 80, 0.14); }
+.field.is-invalid .field__error { display: block; }
+
+/* Botón mostrar/ocultar contraseña */
+.field__toggle {
+  position: absolute;
+  right: 0.4rem;
+  top: 0.4rem;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color var(--duration) var(--ease), background var(--duration) var(--ease);
+}
+
+.field__toggle:hover { color: var(--color-primary); background: var(--color-primary-soft); }
+.field__toggle svg { transition: transform var(--duration) var(--ease); }
+.field__toggle[aria-pressed="true"] svg { transform: scale(0.92); }
+
+/* Select de rol */
+.field--select .field__input--select {
+  appearance: none;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.field--select .field__input--select:invalid { color: var(--color-text); }
+
+.field__label--select {
+  top: 0.68rem;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.field--select:focus-within .field__label--select { color: var(--color-primary); }
+
+.field__chevron {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+/* Fila: recordar + olvidé contraseña */
+.login-form__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -0.4rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+.checkbox__box {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid var(--color-border);
+  display: inline-block;
+  position: relative;
+  transition: background var(--duration) var(--ease), border-color var(--duration) var(--ease);
+}
+
+.checkbox__box::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform var(--duration) var(--ease);
+}
+
+.checkbox input:checked + .checkbox__box {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox input:checked + .checkbox__box::after { transform: rotate(45deg) scale(1); }
+
+.checkbox input:focus-visible + .checkbox__box { box-shadow: 0 0 0 4px var(--color-primary-soft); }
+
+.login-form__forgot {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--duration) var(--ease);
+}
+
+.login-form__forgot:hover { color: var(--color-primary-dark); text-decoration: underline; }
+
+/* =====================================================
+   BOTÓN DE ENVÍO
+   ===================================================== */
+
+.btn-submit {
+  position: relative;
+  height: 52px;
+  border: none;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background var(--duration) var(--ease), transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+  margin-top: 0.35rem;
+}
+
+.btn-submit:hover { background: var(--color-primary-dark); box-shadow: 0 8px 20px -8px rgba(0, 86, 179, 0.55); }
+.btn-submit:active { transform: scale(0.98); }
+.btn-submit:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+
+.btn-submit__spinner {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+}
+
+.btn-submit.is-loading .btn-submit__label { opacity: 0; }
+.btn-submit.is-loading .btn-submit__spinner { display: block; animation: spin 0.7s linear infinite; }
+.btn-submit.is-loading { pointer-events: none; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =====================================================
+   PIE DE FORMULARIO
+   ===================================================== */
+
+.form-card__footer {
+  margin: 1.75rem 0 0;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* =====================================================
+   Entrada suave de la tarjeta al cargar
+   ===================================================== */
+
+.form-card {
+  animation: rise-in 0.5s var(--ease) both;
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
