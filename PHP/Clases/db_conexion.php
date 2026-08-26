@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $usuario = "root";
 $password = "";
-$dbname = "andre";
+$dbname = "mesa_ayuda_armonia";
 
 // Crear la conexión
 $conexion = mysqli_connect($servidor, $usuario, $password, $dbname);
@@ -11,6 +11,6 @@ $conexion = mysqli_connect($servidor, $usuario, $password, $dbname);
 if (!$conexion) {
     die("La conexión ha fallado: " . mysqli_connect_error());
 }
-
-echo "¡Conexión exitosa!";
+/* 
+echo "¡Conexión exitosa!"; */
 ?>

@@ -6,16 +6,10 @@ document
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Evitamos que el formulario se envíe de forma tradicional
 
-      validarFormulario(); // Llamamos a la función para validar el formulario
-
-
-      
-
-
-    // Función para validar el formulario y mostrar el modal
+    validarFormulario(); // Llamamos a la función para validar el formulario
 
     function validarFormulario() {
-      fetch("../PHP/Clases/db_conexion.php")
+      fetch("../PHP/Clases/db_procesar.php")
         .then((respuesta) => respuesta.text()) // Leemos la respuesta como texto
         .then((datos) => {
           contenedorModal.innerHTML = `<p>${datos}</p>`;
