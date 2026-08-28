@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de tickets de soporte de Willpower Helpdesk">
+    <title>Personal | Willpower Helpdesk</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="../IMG/escudo-medico.png">
+</head>
+
+<body>
+    <aside class="menu-lateral" aria-label="Menú principal de Willpower Helpdesk">
+        <a class="marca-sistema marca-sistema--lateral" href="index.html"
+            aria-label="Ir al inicio de Willpower Helpdesk">
+            <span class="marca-sistema__icono" aria-hidden="true">+</span>
+            <span class="marca-sistema__texto">
+                <strong>Willpower</strong>
+                <span>Helpdesk</span>
+            </span>
+        </a>
+
+        <nav class="navegacion-lateral" aria-label="Secciones del sistema">
+            <a href="index.html" class="navegacion-lateral__enlace navegacion-lateral__enlace--activo">
+                <span aria-hidden="true">▦</span>
+                Panel principal
+            </a>
+            <a href="#lista-tickets" class="navegacion-lateral__enlace">
+                <span aria-hidden="true">!</span>
+                Mis tickets
+            </a>
+            <a href="#modal-crear-ticket" class="navegacion-lateral__enlace">
+                <span aria-hidden="true">+</span>
+                Crear ticket
+            </a>
+            <a href="#titulo-resumen-ayuda" class="navegacion-lateral__enlace">
+                <span aria-hidden="true">△</span>
+                Centro de ayuda
+            </a>
+        </nav>
+
+        <p class="menu-lateral__pie">Willpower Helpdesk<br>Centro Médico Armonía</p>
+    </aside>
+
+    <header class="encabezado-principal">
+        <nav class="barra-navegacion" aria-label="Navegación principal">
+            <div class="usuario-navegacion">
+                <span class="usuario-navegacion__saludo">Hola,</span>
+                <strong id="nombre-usuario"></strong>
+                <button type="button" class="btn-cerrar-sesion" id="btn-cerrar-sesion">
+                    Cerrar sesión
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="contenido-principal">
+        <section class="cabecera-panel" aria-labelledby="titulo-panel">
+            <div>
+                <p class="etiqueta-seccion">Centro Médico Armonía</p>
+                <h1 id="titulo-panel">Mis tickets</h1>
+                <p class="texto-introduccion">Consulta el estado de tus solicitudes y contacta al equipo de soporte.</p>
+            </div>
+            <button type="button" class="btn-crear-ticket" id="btn-crear-ticket" aria-controls="modal-crear-ticket">
+                <span aria-hidden="true">+</span>
+                Crear ticket nuevo
+            </button>
+        </section>
+
+        <section class="seccion-tickets" aria-labelledby="titulo-lista-tickets">
+            <div class="seccion-cabecera">
+                <div>
+                    <h2 id="titulo-lista-tickets">Tickets recientes</h2>
+                    <p class="texto-secundario">Solicitudes registradas con tu cuenta.</p>
+                </div>
+                <span class="contador-tickets" id="contador-tickets">3 tickets</span>
+            </div>
+
+            <div class="contenedor-tabla">
+                <table class="tabla-tickets" id="lista-tickets">
+                    <caption class="texto-solo-lector">Lista de tickets creados por el usuario</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">N.º de ticket</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Prioridad</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Fecha de creación</th>
+                            <th scope="col"><span class="texto-solo-lector">Acciones</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ticket-id="TCK-1048">
+                            <td><strong>TCK-1048</strong></td>
+                            <td>La impresora de recepción no responde</td>
+                            <td>Hardware</td>
+                            <td><span class="etiqueta-prioridad etiqueta-prioridad--alta">Alta</span></td>
+                            <td><span class="etiqueta-estado etiqueta-estado--proceso">En proceso</span></td>
+                            <td>26/08/2026</td>
+                            <td><button type="button" class="btn-ver-detalle" data-ticket="TCK-1048">Ver
+                                    detalle</button></td>
+                        </tr>
+                        <tr data-ticket-id="TCK-1039">
+                            <td><strong>TCK-1039</strong></td>
+                            <td>Acceso bloqueado al sistema de turnos</td>
+                            <td>Software</td>
+                            <td><span class="etiqueta-prioridad etiqueta-prioridad--urgente">Urgente</span></td>
+                            <td><span class="etiqueta-estado etiqueta-estado--abierto">Abierto</span></td>
+                            <td>24/08/2026</td>
+                            <td><button type="button" class="btn-ver-detalle" data-ticket="TCK-1039">Ver
+                                    detalle</button></td>
+                        </tr>
+                        <tr data-ticket-id="TCK-1027">
+                            <td><strong>TCK-1027</strong></td>
+                            <td>Conexión intermitente en consultorio 4</td>
+                            <td>Red</td>
+                            <td><span class="etiqueta-prioridad etiqueta-prioridad--media">Media</span></td>
+                            <td><span class="etiqueta-estado etiqueta-estado--resuelto">Resuelto</span></td>
+                            <td>19/08/2026</td>
+                            <td><button type="button" class="btn-ver-detalle" data-ticket="TCK-1027">Ver
+                                    detalle</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="resumen-ayuda" aria-labelledby="titulo-resumen-ayuda">
+            <div class="resumen-ayuda__icono" aria-hidden="true">?</div>
+            <div>
+                <h2 id="titulo-resumen-ayuda">¿Necesitas ayuda?</h2>
+                <p>Describe el problema con claridad e incluye el área donde ocurre para que podamos atenderlo más
+                    rápido.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie-pagina">
+        <div class="pie-pagina__contenido">
+            <a class="logo-footer" href="index.html" aria-label="Ir al inicio de Willpower Helpdesk">
+                <!-- <img class="logo-footer__imagen" src="../IMG/escudo-medico.png" alt=""> -->
+                <span class="logo-footer__fuego" aria-hidden="true">🔥</span>
+                <span class="logo-footer__nombre">
+                    <strong>Willpower</strong>
+                    <span>Helpdesk</span>
+                </span>
+            </a>
+
+            <p class="pie-pagina__texto">Soporte tecnológico para Centro Médico Armonía</p>
+            <p class="pie-pagina__copyright">© 2026 Willpower. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <dialog class="modal" id="modal-crear-ticket" aria-labelledby="titulo-crear-ticket">
+        <div class="modal__cabecera">
+            <div>
+                <p class="etiqueta-seccion">Nueva solicitud</p>
+                <h2 id="titulo-crear-ticket">Crear ticket nuevo</h2>
+            </div>
+            <button type="button" class="btn-cerrar-modal" id="btn-cerrar-modal-crear"
+                aria-label="Cerrar formulario">×</button>
+        </div>
+
+        <form class="formulario-ticket" id="formulario-crear-ticket">
+            <div class="campo-formulario">
+                <label for="titulo-ticket">Título</label>
+                <input type="text" id="titulo-ticket" name="titulo" placeholder="Ej.: No puedo acceder al correo"
+                    required>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="descripcion-ticket">Descripción</label>
+                <textarea id="descripcion-ticket" name="descripcion" rows="5"
+                    placeholder="Explica qué sucede y cuándo comenzó..." required></textarea>
+            </div>
+
+            <div class="campos-en-linea">
+                <div class="campo-formulario">
+                    <label for="categoria-ticket">Categoría</label>
+                    <select id="categoria-ticket" name="categoria" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="software">Software</option>
+                        <option value="red">Red</option>
+                    </select>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="prioridad-ticket">Prioridad</label>
+                    <select id="prioridad-ticket" name="prioridad" required>
+                        <option value="">Selecciona una prioridad</option>
+                        <option value="baja">Baja</option>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                        <option value="urgente">Urgente</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal__acciones">
+                <button type="button" class="btn-secundario" id="btn-cancelar-ticket">Cancelar</button>
+                <button type="submit" class="btn-primario" id="btn-enviar-ticket">Enviar ticket</button>
+            </div>
+        </form>
+    </dialog>
+
+    <section class="modal-detalle" id="detalle-ticket" hidden aria-labelledby="titulo-detalle-ticket">
+        <div class="modal-detalle__contenido">
+            <div class="modal__cabecera">
+                <div>
+                    <p class="etiqueta-seccion">Información de solicitud</p>
+                    <h2 id="titulo-detalle-ticket">Detalle del ticket <span id="detalle-numero-ticket">TCK-1048</span>
+                    </h2>
+                </div>
+                <button type="button" class="btn-cerrar-modal" id="btn-cerrar-detalle"
+                    aria-label="Cerrar detalle">×</button>
+            </div>
+
+            <div class="detalle-resumen" id="informacion-ticket">
+                <div><span class="detalle-resumen__etiqueta">Título</span><strong id="detalle-titulo-ticket">La
+                        impresora de recepción no responde</strong></div>
+                <div><span class="detalle-resumen__etiqueta">Categoría</span><span
+                        id="detalle-categoria-ticket">Hardware</span></div>
+                <div><span class="detalle-resumen__etiqueta">Prioridad</span><span
+                        id="detalle-prioridad-ticket">Alta</span></div>
+                <div><span class="detalle-resumen__etiqueta">Estado actual</span><span id="detalle-estado-ticket">En
+                        proceso</span></div>
+                <div><span class="detalle-resumen__etiqueta">Creado el</span><span
+                        id="detalle-fecha-ticket">26/08/2026</span></div>
+            </div>
+
+            <div class="detalle-grid">
+                <section class="historial-ticket" aria-labelledby="titulo-historial-ticket">
+                    <h3 id="titulo-historial-ticket">Historial de estados</h3>
+                    <ol class="linea-tiempo" id="historial-estados">
+                        <li class="linea-tiempo__item linea-tiempo__item--activo">
+                            <strong>En proceso</strong>
+                            <time datetime="2026-08-27T09:30">27/08/2026, 09:30</time>
+                        </li>
+                        <li class="linea-tiempo__item">
+                            <strong>Asignado a soporte</strong>
+                            <time datetime="2026-08-26T14:10">26/08/2026, 14:10</time>
+                        </li>
+                        <li class="linea-tiempo__item">
+                            <strong>Ticket creado</strong>
+                            <time datetime="2026-08-26T13:45">26/08/2026, 13:45</time>
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="comentarios-ticket" aria-labelledby="titulo-comentarios-ticket">
+                    <h3 id="titulo-comentarios-ticket">Comentarios</h3>
+                    <ul class="lista-comentarios" id="lista-comentarios">
+                        <li class="comentario">
+                            <div class="comentario__cabecera"><strong>Soporte TI</strong><time
+                                    datetime="2026-08-27T09:30">27/08/2026, 09:30</time></div>
+                            <p>Estamos revisando la conexión de la impresora y sus controladores.</p>
+                        </li>
+                        <li class="comentario">
+                            <div class="comentario__cabecera"><strong>Nombre del usuario</strong><time
+                                    datetime="2026-08-26T13:45">26/08/2026, 13:45</time></div>
+                            <p>El equipo enciende, pero no aparece disponible para imprimir.</p>
+                        </li>
+                    </ul>
+
+                    <form class="formulario-comentario" id="formulario-comentario">
+                        <label for="nuevo-comentario">Agregar comentario</label>
+                        <textarea id="nuevo-comentario" name="comentario" rows="3"
+                            placeholder="Escribe una actualización..." required></textarea>
+                        <button type="submit" class="btn-primario" id="btn-agregar-comentario">Agregar
+                            comentario</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    <script src="../JS/personal.js"></script>
+</body>
+
+</html>

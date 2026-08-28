@@ -9,7 +9,31 @@ class consultas
         $this->conexion = $conexion;
     }
 
-    public function obtenerRoles():array{
+    public function llamarUsuario($correo, $contrasena)
+    {
+
+        $sql = "SELECT * FROM usuarios WHERE correo = ?";
+    //todos los elemetos de la tabla usuarios
+        $preparacion = mysqli_prepare($this->conexion, $sql);
+        mysqli_stmt_bind_param($preparacion, "s", $correo);
+        //le indica a ? que ahi va esta el valor $ correo y s indica el tipo de  dato 
+
+        mysqli_stmt_execute($preparacion);
+        //ejecuta el comando sql para prevenir inyeccion sql
+
+        $resultado = mysqli_stmt_get_result($preparacion);
+        $cCorreo = mysqli_fetch_assoc($resultado);
+
+        if (!$cCorreo) {
+
+            return false;
+        }
+        if (password_verify($contrasena, $cCorreo['password_hash'])) {
+            return $cCorreo;
+        }
+    }
+    public function obtenerRoles(): array
+    {
         $sql = "SELECT * FROM roles";
 
         $resultado = mysqli_query($this->conexion, $sql);
